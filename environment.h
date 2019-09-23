@@ -32,6 +32,7 @@ class Environment{
         void set_stinch(Environment &env);
         void set_breeze(Environment &env);
         void set_glitter(Environment &env);
+        std::vector<int> create_adjacent(int x);
         void set_agent();
 };
 #endif

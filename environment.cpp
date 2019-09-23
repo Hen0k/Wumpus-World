@@ -65,75 +65,29 @@ void Environment::print_world(Environment &env){
       std::cout<<std::endl;
     }
 }  
-
+std::vector<int> Environment::create_adjacent(int x){
+    std::vector<int> adjacent;
+    if(x < 12)
+        adjacent.push_back(x + 4);                 
+    if(x > 3)
+        adjacent.push_back(x - 4);             
+    if(x % 4 != 0)
+        adjacent.push_back(x - 1);          
+    if(x % 4!=3)
+        adjacent.push_back(x + 1);     
+    return adjacent;           
+}
 void Environment::set_stinch(Environment &env){
-     env.stinch.push_back(env.wumpus_cont + 4);
-     env.stinch.push_back(env.wumpus_cont - 4);
-     env.stinch.push_back(env.wumpus_cont + 1);
-     env.stinch.push_back(env.wumpus_cont - 1);
-     int size = 4;
-     for(int i=0;i<size;i++){
-         if(env.stinch.at(i) < 0 || env.stinch.at(i) > 15){
-             env.stinch.erase(std::remove(env.stinch.begin(), env.stinch.end(), env.stinch.at(i)), env.stinch.end());
-             size--;
-         }
-         if(env.wumpus_cont % 4==0 && env.stinch.at(i)%4==3){
-             env.stinch.erase(std::remove(env.stinch.begin(), env.stinch.end(), env.stinch.at(i)), env.stinch.end());
-             size--;
-         }
-         if((env.wumpus_cont+1) % 4==0 && env.stinch.at(i)%4==0){
-             env.stinch.erase(std::remove(env.stinch.begin(), env.stinch.end(), env.stinch.at(i)), env.stinch.end());
-             size--;
-         }
-         
-     }
-     std::cout<<"Stinch:"<<std::endl;
-     for(int t=0;t<env.stinch.size();t++){
-        std::cout<<env.stinch.at(t)<<" ";
-     }
-     std::cout<<std::endl;
+     env.stinch = env.create_adjacent(env.wumpus_cont);
 }
 
 void Environment::set_breeze(Environment &env){
-    
-    
-    for(int j=0;j<env.pits_cont.size();j++){
-        std::vector<int> pit_adj_cont;
-        pit_adj_cont.push_back(env.pits_cont.at(j) - 4);
-        pit_adj_cont.push_back(env.pits_cont.at(j) + 4);
-        pit_adj_cont.push_back(env.pits_cont.at(j) - 1);
-        pit_adj_cont.push_back(env.pits_cont.at(j) + 1);
-        
-        int size = pit_adj_cont.size();
-        
-        for(int i=0;i<size;i++){
-         if(pit_adj_cont.at(i) < 0 || pit_adj_cont.at(i) > 15){
-            pit_adj_cont.erase(std::remove(pit_adj_cont.begin(), pit_adj_cont.end(), pit_adj_cont.at(i)), pit_adj_cont.end());
-            size--;i--;
-            continue;
-         }
-         if(env.pits_cont.at(j) % 4==0 && pit_adj_cont.at(i)%4==3){
-             pit_adj_cont.erase(std::remove(pit_adj_cont.begin(), pit_adj_cont.end(), pit_adj_cont.at(i)), pit_adj_cont.end());
-             size--;i--;
-             continue;
-         }
-         if((env.pits_cont.at(j)+1) % 4==0 && pit_adj_cont.at(i)%4==0){
-             pit_adj_cont.erase(std::remove(pit_adj_cont.begin(), pit_adj_cont.end(), pit_adj_cont.at(i)), pit_adj_cont.end());
-             size--;i--;
-             continue;
-         }
-         
-     }
+for(int j=0;j<env.pits_cont.size();j++){
+        std::vector<int> pit_adj_cont = env.create_adjacent(env.pits_cont.at(j));
         env.breeze.push_back(pit_adj_cont);
         pit_adj_cont.clear();
     }
-     std::cout<<"Breeze:"<<std::endl;
-     for(int j=0;j<env.breeze.size();j++){
-     for(int t=0;t<env.breeze.at(j).size();t++){
-        std::cout<<env.breeze.at(j).at(t)<<" ";
-     }
-      std::cout<<std::endl;
-    }
+     
 }
 int main(){
     Environment env;
