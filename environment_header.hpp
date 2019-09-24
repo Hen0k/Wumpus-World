@@ -16,19 +16,37 @@ class Environment{
         std::vector<int> glitter;
         
     public:
-        std::vector<int> get_stinch;
-        std::vector<std::vector<int>> get_breeze;
+        /*set the pits, the wumpus and the gold to the 4x4 room*/
         std::vector<std::vector<char>> set_rooms(std::vector<int> pits,int w,int g);
+        
+        /*pick 5 random numbers from 0-16*/
         std::vector<int> set_index_cont();
+        
+        /*choose the pits position from the 5 random numbers*/
         std::vector<int> set_pits_position(std::vector<int> index_cont);
+        
+        /*choose the wumpus position from the 5 random numbers*/
         int set_wumpus_position(std::vector<int> index_cont);
+        
+        /*choose the gold position from the 5 random numbers*/
         int set_gold_position(std::vector<int> index_cont);
+        
+        /*print out the environment*/
         void print_world(std::vector<std::vector<char>> world);
+        
+        /*get the stinch rooms*/
         std::vector<int> set_stinch(int wumpus_cont);
+        
+        /*get the breeze rooms*/
         std::vector<std::vector<int>> set_breeze(std::vector<int> pits_cont);
-        void set_glitter(Environment &env);
-        bool check_stinch(int x);
-        bool check_breeze(int x);
+        
+        /*start playing the game*/
         void start(Environment &env);
+        
+        /*variable for storing stinch rooms*/
+        std::vector<int> get_stinch;
+        
+        /*variable for storing breeze rooms*/
+        std::vector<std::vector<int>> get_breeze;
 };
 #endif
