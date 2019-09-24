@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/Wumpus_World.dir/environment.o  -o Wumpus_World -rdynamic 
