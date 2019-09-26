@@ -48,5 +48,12 @@ class Environment{
         
         /*variable for storing breeze rooms*/
         std::vector<std::vector<int>> get_breeze;
+
+        /*variable for gold room*/
+        int gold_cont;
+
+        /*variable for containing the whole environment*/
+        std::vector<std::vector<char>> world;
+        
 };
 #endif

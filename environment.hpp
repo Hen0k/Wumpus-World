@@ -89,8 +89,8 @@ void Environment::start(Environment &env){
     std::vector<int> index_cont = env.set_index_cont();
     std::vector<int> pits_cont = env.set_pits_position(index_cont);
     int wumpus_cont = env.set_wumpus_position(index_cont);
-    int gold_cont = env.set_gold_position(index_cont);
-    std::vector<std::vector<char>> world = env.set_rooms(pits_cont,wumpus_cont,gold_cont);
+    env.gold_cont = env.set_gold_position(index_cont);
+    env.world = env.set_rooms(pits_cont,wumpus_cont,gold_cont);
     env.print_world(world);
     env.get_stinch = env.set_stinch(wumpus_cont);
     env.get_breeze = env.set_breeze(pits_cont);
