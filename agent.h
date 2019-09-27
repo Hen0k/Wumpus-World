@@ -7,7 +7,7 @@ public:
     int prev_position = 0;
     int arrow;
     void move(int &current_position,int &prev_position,std::vector<std::vector<bool>> &percept_history,int gold_cont);
-    auto sense(int current_pos, std::vector<int> stinch, std::vector<std::vector<int>> breeze);
+    std::vector<bool> sense(int current_pos, std::vector<int> stinch, std::vector<std::vector<int>> breeze);
     void shoot();
     void grab();
     void fill_percept_history(std::vector<std::vector<bool>> &percept_history, std::vector<bool> sense, int current_pos);

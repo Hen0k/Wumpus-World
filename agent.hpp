@@ -1,4 +1,4 @@
-#include "agent_header.hpp"
+#include "agent.h"
 
 //0:wumpus 1:pit 2:gold 3:stinch 4:breeze 5:ok 6:visited
 std::vector<std::vector<bool>> Agent::make_percept_history()
@@ -108,7 +108,7 @@ void Agent::move(int &current_position,int &prev_position,std::vector<std::vecto
     }
 }
 
-auto Agent::sense(int current_pos, std::vector<int> stinch, std::vector<std::vector<int>> breeze)
+std::vector<bool> Agent::sense(int current_pos, std::vector<int> stinch, std::vector<std::vector<int>> breeze)
 {
     /*sense_cont.at(0) for stinch
      * sense_cont.at(1) for breeze*/
