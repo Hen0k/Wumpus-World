@@ -1,4 +1,4 @@
-#include "agent_header.hpp"
+#include "agent.hpp"
 
 
 int main()
@@ -6,17 +6,18 @@ int main()
     Agent agent;
     agent.start(agent);
     agent.percept_history = agent.make_percept_history();
-    std::vector<bool> test = agent.sense(4, agent.get_stinch, agent.get_breeze);
-    std::cout << std::endl
-              << test.at(0) << " " << test.at(1) << std::endl;
-    agent.fill_percept_history(agent.percept_history, test, 4);
-    for (int i = 0; i < 16; i++)
+    agent.set_agent_position(agent.world,agent.current_position,agent.prev_position);
+    agent.print_world(agent.world);
+    while(1)
     {
-        for (int j = 0; j < 7; j++)
-        {
-            std::cout << agent.percept_history.at(i).at(j) << " ";
-        }
-        std::cout << std::endl;
+    std::cout<<"press any key"<<std::endl;
+    char c;
+    std::cin>>c;
+    std::vector<bool> sense = agent.sense(agent.current_position, agent.get_stinch, agent.get_breeze);
+    agent.fill_percept_history(agent.percept_history, sense, agent.current_position);
+    agent.move(agent.current_position,agent.prev_position,agent.percept_history,agent.gold_cont);
+    agent.set_agent_position(agent.world,agent.current_position,agent.prev_position);
+    agent.print_world(agent.world);
     }
     return 0;
 }
